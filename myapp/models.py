@@ -5,6 +5,13 @@ from django.utils.text import slugify
 from django.urls import reverse
 
 # Create your models here.
+class Tag(models.Model):
+    title = models.CharField(max_length=255, default='')
+
+    def __str__(self) -> str:
+        return self.title
+
+
 class Category(models.Model):
     title = models.CharField(max_length = 255, default = '')
 
@@ -16,6 +23,7 @@ class Flower(models.Model):
     description = models.TextField(default='')
     slug = models.SlugField(blank = True, default = '')
     category = models.ForeignKey(Category, null=True, on_delete = models.PROTECT)
+    tags = models.ManyToManyField(Tag)
 
     def __str__(self) -> str:
         return self.title
