@@ -4,10 +4,18 @@
 
 <div class="row my-3 justify-content-center">
 {% for flower in flowers %}
-  <div class="card col-lg-2 col-md-3 mx-1">
+  <div class="card col-lg-2 col-md-5 mx-1">
     <div class="card-body">
         <h5 class="card-title"><a href="{% url 'detail' flower.slug %}">{{ flower.title }}</a></h5>
         <p class="card-text">{{ flower.description | truncatechars:100 }}</p>
+    </div>
+    <hr>
+    All flowers in the <strong>{{ flower.category }}</strong>category:
+    {% for c_flower in flower.category.flower_set.all %}
+    <a href="{% url 'detail' c_flower.slug %}">{{ c_flower }}</a>
+    {% endfor %}
+    <div class="card-footer">    
+        <a href="#" class="card-link">{{ flower.category }}</a>
         <a href="adminmyapp/flower/{{ flower.id }}/change" class="card-link">Edit</a>
         <a href="adminmyapp/flower/{{ flower.id }}/delete" class="card-link">Delete</a>
     </div>
