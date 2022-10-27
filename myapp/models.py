@@ -7,10 +7,14 @@ from django.urls import reverse
 # Create your models here.
 class Tag(models.Model):
     title = models.CharField(max_length=255, default='')
+    slug = models.SlugField(blank=True, default = '')
 
     def __str__(self) -> str:
         return self.title
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Tag, self).save()
 
 class Category(models.Model):
     title = models.CharField(max_length = 255, default = '')

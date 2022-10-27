@@ -1,6 +1,17 @@
 {% extends 'base/base.html' %}
 {% block content %}
-
+<div class="container">
+  <div class="row">
+      <nav>
+          <form method="get" action="/" class="form-inline mt-2 mt-md-0 col-lg-3 col-md-4 col-sm-6 mx-5 ">
+              <div class="input-group">
+              <input id="q" name="q" value="{{ request.GET.q }}" class="form-control mr-sm-2" type="text" placeholder="Search..." aria-label="Search">
+              <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
+              </div>
+          </form>
+      </nav>
+  </div>
+</div>
 
 <div class="row my-3 justify-content-center">
 {% for flower in flowers %}
@@ -17,7 +28,7 @@
     <hr>
     Tags:
     {% for tag in flower.tags.all %}
-    <a href="#">{{ tag }}</a>
+    <a href="{% url 'tags' tag.slug %}">{{ tag }}</a>
     {% endfor %}
     <div class="card-footer">    
         <a href="#" class="card-link">{{ flower.category }}</a>
@@ -27,4 +38,5 @@
   </div>
 {% endfor %}
 </div>
+
 {% endblock %}
