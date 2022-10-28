@@ -1,5 +1,8 @@
+from multiprocessing import context
 from django.shortcuts import render, get_object_or_404
 from myapp.models import Flower
+from .forms import MyForm
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 def index(request):
@@ -20,3 +23,17 @@ def detail(request, slug=None):               #stores the slug from the url into
 def tags(request, slug=None):
     flowers = Flower.objects.filter(tags__slug = slug)
     return render(request, 'myapp/index.html',{'flowers': flowers})
+
+
+def create(request):
+   # context = {}
+    if request.method == 'POST':
+        form = MyForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("/")
+    else:
+        form = MyForm()
+
+    #context['form'] = form  
+    return render(request, 'myapp/create.html',{'form':form})
