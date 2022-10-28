@@ -15,7 +15,7 @@
 
 <div class="row my-3">
 {% for flower in flowers %}
-  <div class="card col-lg-2 col-md-5 mx-1">
+  <div class="card col-lg-2 col-md-5 mx-1 my-2">
     <div class="card-body">
         <h5 class="card-title"><a href="{% url 'detail' flower.slug %}">{{ flower.title }}</a></h5>
         <p class="card-text">{{ flower.description | truncatechars:100 }}</p>
@@ -31,9 +31,8 @@
     <a href="{% url 'tags' tag.slug %}">{{ tag }}</a>
     {% endfor %}
     <div class="card-footer">    
-        <a href="#" class="card-link">{{ flower.category }}</a>
-        <a href="adminmyapp/flower/{{ flower.id }}/change" class="card-link">Edit</a>
-        <a href="adminmyapp/flower/{{ flower.id }}/delete" class="card-link">Delete</a>
+        <a href="{% url 'edit' pk=flower.pk %}" class="card-link">Edit</a>
+        <a href="adminmyapp/flower/{{ flower.id }}/delete" class="card-link ">Delete</a>
     </div>
   </div>
 {% endfor %}

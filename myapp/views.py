@@ -37,3 +37,15 @@ def create(request):
 
     #context['form'] = form  
     return render(request, 'myapp/create.html',{'form':form})
+
+def edit(request, pk=None):
+    flower = get_object_or_404(Flower, pk=pk)
+    if request.method == 'POST':
+        form = MyForm(request.POST, instance=flower)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
+    else:
+        form = MyForm(instance=flower)
+
+    return render(request, 'myapp/edit.html',{'form':form})
