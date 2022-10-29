@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from myapp import views as myapp_views
+from django.conf import settings
+from django.conf.urls.static import static 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +27,4 @@ urlpatterns = [
     path('flower/edit/<int:pk>/',myapp_views.edit, name="edit"),
     path('flower/delete/<int:pk>/',myapp_views.delete, name="delete"),
     path('',myapp_views.index, name='index'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

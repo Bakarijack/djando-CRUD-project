@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
       <nav>
-          <form method="get" action="/" class="form-inline mt-2 mt-md-0 col-lg-3 col-md-4 col-sm-6 mx-5 ">
+          <form method="get" action="/" class="form-inline mt-2 mt-md-0 col-lg-3 col-md-4 col-sm-6 ">
               <div class="input-group">
               <input id="q" name="q" value="{{ request.GET.q }}" class="form-control mr-sm-2" type="text" placeholder="Search..." aria-label="Search">
               <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
@@ -16,6 +16,7 @@
 <div class="row my-3">
 {% for flower in flowers %}
   <div class="card col-lg-2 col-md-5 mx-1 my-2">
+    <img class="card-img my-2" src="{{ flower.image.url }}" alt="image">
     <div class="card-body">
         <h5 class="card-title"><a href="{% url 'detail' flower.slug %}">{{ flower.title }}</a></h5>
         <p class="card-text">{{ flower.description | truncatechars:100 }}</p>
@@ -30,9 +31,9 @@
     {% for tag in flower.tags.all %}
     <a href="{% url 'tags' tag.slug %}">{{ tag }}</a>
     {% endfor %}
-    <div class="card-footer">    
-        <a href="{% url 'edit' pk=flower.pk %}" class="card-link">Edit</a>
-        <a href="{% url 'delete' pk=flower.pk %}" class="card-link ">Delete</a>
+    <div class="card-footer text-center">    
+        <a href="{% url 'edit' pk=flower.pk %}" class="card-link me-5">Edit</a>
+        <a href="{% url 'delete' pk=flower.pk %}" class="card-link">Delete</a>
     </div>
   </div>
 {% endfor %}

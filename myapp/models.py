@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from email.policy import default
 from unicodedata import category
 from django.db import models
@@ -28,6 +29,8 @@ class Flower(models.Model):
     slug = models.SlugField(blank = True, default = '')
     category = models.ForeignKey(Category, null=True, on_delete = models.PROTECT)
     tags = models.ManyToManyField(Tag)
+    image = models.ImageField(default='', blank=True,upload_to='images')
+
 
     def __str__(self) -> str:
         return self.title
