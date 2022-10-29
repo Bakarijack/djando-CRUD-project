@@ -32,7 +32,7 @@
     {% endfor %}
     <div class="card-footer">    
         <a href="{% url 'edit' pk=flower.pk %}" class="card-link">Edit</a>
-        <a href="adminmyapp/flower/{{ flower.id }}/delete" class="card-link ">Delete</a>
+        <a href="{% url 'delete' pk=flower.pk %}" class="card-link ">Delete</a>
     </div>
   </div>
 {% endfor %}

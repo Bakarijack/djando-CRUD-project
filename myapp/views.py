@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from myapp.models import Flower
 from .forms import MyForm
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -49,3 +50,9 @@ def edit(request, pk=None):
         form = MyForm(instance=flower)
 
     return render(request, 'myapp/edit.html',{'form':form})
+
+def delete(request, pk=None):
+    flower = get_object_or_404(Flower, pk=pk)
+    flower.delete()
+
+    return render(request, 'myapp/delete.html',{'flower':flower})

@@ -23,5 +23,6 @@ urlpatterns = [
     path('tags/<slug:slug>/',myapp_views.tags,name='tags'),
     path('flower/',myapp_views.create, name="create"),
     path('flower/edit/<int:pk>/',myapp_views.edit, name="edit"),
+    path('flower/delete/<int:pk>/',myapp_views.delete, name="delete"),
     path('',myapp_views.index, name='index'),
 ]
